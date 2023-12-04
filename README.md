@@ -21,3 +21,8 @@ https://github.com/spacemanspiff2007/PyArtNet
 python3 scanDMX.py -a192.168.188.81 -u1 -c1 -r10 -s500 -k
 
 usage: scanDMX.py [-h] -a ADDRESS -u UNIVERSE [-c CHANNEL] [-r RANGE] [-s SPEED] [-k]
+
+## Wireshark
+ip.src == 192.168.188.29 && ip.dst == 192.168.188.81 && udp.port == 5568
+
+
