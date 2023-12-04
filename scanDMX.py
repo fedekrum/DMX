@@ -20,7 +20,7 @@ def read_single_keypress():
         finally:
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
 
-async def animate_channel(node, universe_number, channel_number, animation_speed):
+""" async def animate_channel(node, universe_number, channel_number, animation_speed):
     # Get the universe
     universe = node.get_universe(universe_number)
 
@@ -37,7 +37,29 @@ async def animate_channel(node, universe_number, channel_number, animation_speed
     # Send the values
     for value in sequence:
         channel.set_values([value])
-        await asyncio.sleep(delay)
+        await asyncio.sleep(delay) """
+
+async def animate_channel(node, universe_number, channel_number, animation_speed):
+    # Get the universe
+    universe = node.get_universe(universe_number)
+
+    # Create the channel name based on the channel number
+    channel_name = f'channel_{channel_number}'
+    channel = universe.add_channel(start=channel_number, width=1, channel_name=channel_name)
+    delay = animation_speed / 1000
+
+    # Send value 255
+    channel.set_values([255])
+
+    # Pause for 2 seconds
+    await asyncio.sleep(delay)
+
+    # Send value 0
+    channel.set_values([0])
+
+    # Pause for 2 seconds
+    await asyncio.sleep(delay)
+
 
 async def main(args):
     # Create the sACN node
